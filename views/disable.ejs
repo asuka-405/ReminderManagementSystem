@@ -1,0 +1,23 @@
+<link rel="stylesheet" type="text/css" href="/Styles/global.css" />
+<script src="/Scripts/logout.js"></script>
+<body>
+  <style>
+    main {
+      margin-top: 5vh !important;
+    }
+  </style>
+  <main class="flex" id="login-form">
+    <button onclick="logout()" class="simple danger-btn logout-btn">
+      Log Out
+    </button>
+    <h1>Disable Reminder</h1>
+    <form
+      class="flex"
+      action="/reminder/options/disable/<%=reminderID%>"
+      method="post"
+    >
+      <img src="/Media/logo.jpg" alt="krepl" width="50px" />
+      <button type="submit" class="simple danger-btn">Confirm Disable</button>
+    </form>
+  </main>
+</body>

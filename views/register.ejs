@@ -1,0 +1,35 @@
+<link rel="stylesheet" type="text/css" href="/Styles/global.css" />
+<body>
+  <main class="flex" id="login-form">
+    <h1>Register</h1>
+    <form class="flex" action="/auth/register" method="post">
+      <img src="/Media/logo.jpg" alt="krepl" width="50px" />
+      <label for="username"
+        >Username <input type="text" name="username" id="username"
+      /></label>
+      <label for="password"
+        >Password <input type="password" name="password" id="password"
+      /></label>
+      <label for="confirm-password"
+        >Confirm
+        <input type="password" name="confirm-password" id="confirm-password"
+      /></label>
+      <button type="submit">submit</button>
+    </form>
+  </main>
+  <script>
+    const passwordInput = document.getElementById("password")
+    const confirmPasswordInput = document.getElementById("confirm-password")
+    const submitButton = document.querySelector("button[type='submit']")
+    submitButton.disabled = true
+    confirmPasswordInput.addEventListener("input", () => {
+      if (passwordInput.value === confirmPasswordInput.value) {
+        confirmPasswordInput.setCustomValidity("")
+        submitButton.disabled = false
+      } else {
+        confirmPasswordInput.setCustomValidity("Passwords do not match")
+        submitButton.disabled = true
+      }
+    })
+  </script>
+</body>

@@ -1,0 +1,83 @@
+<link rel="stylesheet" type="text/css" href="/Styles/global.css" />
+<script src="/Scripts/logout.js"></script>
+<body>
+  <style>
+    main {
+      margin-top: 5vh !important;
+    }
+  </style>
+  <main class="flex" id="login-form">
+    <button onclick="logout()" class="simple danger-btn logout-btn">
+      Log Out
+    </button>
+    <h1>Update Reminder</h1>
+    <form
+      class="flex"
+      action="/reminder/options/modify/<%=reminder.id%>"
+      method="post"
+    >
+      <img src="/Media/logo.jpg" alt="krepl" width="50px" />
+      <label for="date"
+        >Date
+        <input
+          type="date"
+          name="date"
+          id="date"
+          value="<%=reminder.date%>"
+          required
+      /></label>
+      <label for="subject"
+        >Subject <input type="text" name="subject" id="subject"
+        value="<%=reminder.subject%>"
+      </label>
+      <label for="description"
+        ><div>Reminder</div>
+        <textarea type="text" name="description" id="description">
+<%=reminder.description%></textarea
+        >
+      </label>
+      <label for="email"
+        ><div>Email</div>
+        <input type="email" name="email" id="email" value="<%=reminder.email%>"
+      /></label>
+      <label for="contact"
+        ><div>Contact No</div>
+        <input
+          type="text"
+          name="contact"
+          id="contact"
+          value="<%=reminder.contact%>"
+      /></label>
+      <label for="sms"
+        ><div>SMS</div>
+        <input type="text" name="sms" id="sms" value="<%=reminder.sms%>"
+      /></label>
+      <label for="reoccur">
+        <div>Reoccur</div>
+        <div class="button-cluster grid checkbox-cluster">
+          <label class="checkbox-container">
+            <input type="checkbox" />
+            <span class="checkmark"></span>
+            2
+          </label>
+          <label class="checkbox-container">
+            <input type="checkbox" />
+            <span class="checkmark"></span>
+            3
+          </label>
+          <label class="checkbox-container">
+            <input type="checkbox" />
+            <span class="checkmark"></span>
+            5
+          </label>
+          <label class="checkbox-container">
+            <input type="checkbox" />
+            <span class="checkmark"></span>
+            7
+          </label>
+        </div>
+      </label>
+      <button type="submit">submit</button>
+    </form>
+  </main>
+</body>

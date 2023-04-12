@@ -1,0 +1,20 @@
+<link rel="stylesheet" type="text/css" href="/Styles/global.css" />
+<script src="/Scripts/logout.js"></script>
+<body>
+  <main class="flex" id="login-form">
+    <button onclick="logout()" class="simple danger-btn logout-btn">
+      Log Out
+    </button>
+    <h1>Welcome!! <%= username %></h1>
+    <img src="/Media/logo.jpg" alt="" />
+    <h6>Today is Tuesday, 14th of February</h6>
+    <article class="button-cluster grid grid-2">
+      <a href="/reminder/create">
+        <button class="simple">Set Reminder</button>
+      </a>
+      <a href="/reminder/viewall">
+        <button class="simple">View My Reminders</button>
+      </a>
+    </article>
+  </main>
+</body>

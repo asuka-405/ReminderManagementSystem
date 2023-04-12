@@ -1,0 +1,67 @@
+<link rel="stylesheet" type="text/css" href="/Styles/global.css" />
+<script src="/Scripts/logout.js"></script>
+<body>
+  <main class="flex" id="login-form">
+    <button onclick="logout()" class="simple danger-btn logout-btn">
+      Log Out
+    </button>
+    <img src="/Media/logo.jpg" alt="" />
+    <div class="table-responsive">
+      <table class="table">
+        <tbody>
+          <tr>
+            <th>Subject</th>
+            <td><%= reminder.subject %></td>
+          </tr>
+          <tr>
+            <th>Description</th>
+            <td><%= reminder.description %></td>
+          </tr>
+          <tr>
+            <th>Email</th>
+            <td><%= reminder.email %></td>
+          </tr>
+          <tr>
+            <th>Contact No</th>
+            <td><%= reminder.contact %></td>
+          </tr>
+          <tr>
+            <th>SMS No</th>
+            <td><%= reminder.sms %></td>
+          </tr>
+          <tr>
+            <th>Enabled</th>
+            <td><%= reminder.enabled %></td>
+          </tr>
+          <tr>
+            <th>Repeat</th>
+            <td>
+              <% switch (reminder.reminderFreq) { case 1: %> Daily <% break;
+              case 2: %> In 2 days <% break; case 3: %> In 3 days <% break; case
+              5: %> In 5 days <% break; case 7: %> Weekly <% break; default: %>
+              Invalid frequency <% break; } %>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <article class="button-cluster options-cluster">
+      <a href="/reminder/options/modify/<%=reminder.id%>">
+        <button class="simple">Modify Reminder</button>
+      </a>
+      <a href="/reminder/options/disable/<%=reminder.id%>">
+        <button class="simple">Disable Reminder</button>
+      </a>
+      <a href="/reminder/options/delete/<%=reminder.id%>">
+        <button class="simple">Delete Reminder</button>
+      </a>
+      <a href="/reminder/options/enable/<%=reminder.id%>">
+        <button class="simple">Enable Reminder</button>
+      </a>
+      <a href="/reminder/viewall">
+        <button class="simple">View All Reminders</button>
+      </a>
+    </article>
+  </main>
+</body>

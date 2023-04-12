@@ -1,0 +1,42 @@
+<link rel="stylesheet" type="text/css" href="/Styles/global.css" />
+<script src="/Scripts/logout.js"></script>
+<script src="/Scripts/openoptionsmenu.js"></script>
+<body>
+  <style>
+    main {
+      margin-top: 5vh;
+      max-width: 80vw !important;
+    }
+  </style>
+  <main class="flex">
+    <button onclick="logout()" class="simple danger-btn logout-btn">
+      Log Out
+    </button>
+    <h1>Welcome!! Username</h1>
+    <img src="/Media/logo.jpg" alt="" />
+    <label for="datepicker">Choose a date:</label>
+    <input type="date" id="datepicker" name="datepicker" />
+
+    <article class="reminder-list">
+      <% for (let i = 0; i < reminders.length; i++) { %>
+      <div
+        class="reminder"
+        onclick="openOptionsMenu(this.getAttribute('reminderID'))"
+        reminderID="<%= reminders[i]._id%>"
+      >
+        <h2>Subject : <%= reminders[i].subject %></h2>
+        <p>Description : <%= reminders[i].description %></p>
+        <a style="text-decoration: underline; font-size: 1rem">show more</a>
+      </div>
+      <% } %>
+    </article>
+  </main>
+  <script>
+    const dateInput = document.getElementById("datepicker")
+
+    dateInput.addEventListener("input", () => {
+      const selectedDate = dateInput.value
+      window.location.href = `/reminder/viewall?date=${selectedDate}`
+    })
+  </script>
+</body>
