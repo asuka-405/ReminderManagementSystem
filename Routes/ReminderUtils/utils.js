@@ -1,36 +1,46 @@
 const { getUser } = require("../AuthUtils/utils.js")
 
 module.exports = {
-  checkData,
   processData,
 }
 
 async function processData(req, res, next) {
-  req.body.user = (await getUser({ username: req.user.username }))._id
-
-  req.body = checkData(req, res)
-  return next()
-}
-
-function checkData(req, res) {
-  let { date, subject, description, email, contact, sms, reminderFreq } =
+  const { subject, description, date, email, sms, contact, reminderFreq } =
     req.body
+  req.body.user = req.user._id
 
-  req.body.reoccur = false
-  if (!subject) return res.status(400).render("error.ejs")
-  if (!description) return res.status(400).render("error.ejs")
-  if (!(email || contact || sms)) return res.status(400).render("error.ejs")
-  if (!date) req.body.date = setDate(date)
-  if (!reminderFreq) req.body.reminderFreq = 0
-  if (reminderFreq < 0) req.body.reoccur = true
-  req.body.reminderFreq = Number(reminderFreq)
-  return req.body
-}
+  // Check if subject is not empty and is a string
+  if (!subject || typeof subject !== "string") {
+    res.render("error", { message: "Invalid subject" })
+    return
+  }
 
-function setDate(date) {
-  const NOW = new Date()
-  const DATE_STRING = NOW.toLocaleDateString("en-GB")
-  const [DAY, MONTH, YEAR] = DATE_STRING.split("/").map(Number)
-  date = new Date(YEAR, MONTH - 1, DAY)
-  return date
+  // Check if description is not empty and is a string
+  if (!description || typeof description !== "string") {
+    res.render("error", { message: "Invalid description" })
+    return
+  }
+
+  // Check if date is a valid date string
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) {
+    res.render("error", { message: "Invalid date" })
+    return
+  }
+
+  // Set a default value for reminderFreq if it's not present
+  const validReminderFreqs = [1, 2, 3, 5, 7]
+  const defaultReminderFreq = 0
+  const freq = validReminderFreqs.includes(Number(reminderFreq))
+    ? Number(reminderFreq)
+    : defaultReminderFreq
+
+  // Set reoccur based on reminderFreq
+  req.body.reoccur = freq !== defaultReminderFreq
+
+  // Check if email or sms or contact is present
+  if (!email && !sms && !contact) {
+    res.render("error", { message: "Email or SMS or contact must be present" })
+    return
+  }
+  return next()
 }

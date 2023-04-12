@@ -15,7 +15,6 @@ module.exports = {
 async function setReminder(reminderData) {
   try {
     // Create new reminder and save it to the database
-    console.log(reminderData)
     const newReminder = new REMINDER(reminderData)
     await saveReminder(newReminder)
   } catch (error) {

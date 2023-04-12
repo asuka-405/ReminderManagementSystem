@@ -5,14 +5,13 @@ const ENABLE = true
 const {
   getReminder,
   modifyReminder,
-  disableReminder,
+  deleteReminder,
   toggleReminder,
 } = require("./ReminderUtils/reminder-crud.js")
 const { processData } = require("./ReminderUtils/utils.js")
 
 OPTIONS_ROUTER.get("/", async (req, res) => {
   const CUR_REMINDER = await getReminder({})
-  console.log(CUR_REMINDER)
   res.render("options.ejs", { reminder: CUR_REMINDER })
 })
 

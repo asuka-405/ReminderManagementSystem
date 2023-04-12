@@ -34,8 +34,6 @@ REMINDER_ROUTER.get("/viewall", async (req, res) => {
 })
 REMINDER_ROUTER.get("/view/:reminderID", checkOwner, async (req, res) => {
   const REMINDER = await getReminder({ _id: req.params.reminderID })
-  console.log(REMINDER)
-  console.log(REMINDER)
   res.render("viewReminder.ejs", { reminder: REMINDER })
 })
 

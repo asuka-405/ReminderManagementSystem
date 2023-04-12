@@ -6,6 +6,8 @@ const AUTH_ROUTER = require("./Routes/auth.js")
 const REMINDER_ROUTER = require("./Routes/reminders.js")
 const { checkAuthenticated } = require("./Routes/AuthUtils/utils.js")
 const INIT_MONGOOSE = require("./initMongoose.js")
+// const CRON = require("node-cron")
+// const { Mailman } = require("./Routes/RemindUser/mail.js")
 if (process.env.NODE_ENV !== "production") {
   require("dotenv").config()
 }
@@ -42,6 +44,10 @@ APP.get("/", checkAuthenticated, (req, res) => {
 APP.get("/done", checkAuthenticated, (req, res) => {
   res.render("transactionComplete.ejs")
 })
+
+// CRON.schedule("52 11 * * *", () => {
+//   Mailman()
+// })
 
 APP.listen(PORT, () => {
   console.log(`⚡ listening on http://localhost:${PORT}`)
